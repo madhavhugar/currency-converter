@@ -41,4 +41,20 @@ def load_exchange_data():
 
 
 # TODO: Better way of caching the exchange rates
-rates_df = load_exchange_data()
+def lookup_exchange_rate(date, currency):
+    rates_df = load_exchange_data()
+    out = rates_df.query(f'date == "{date}" and currency == "{currency}"')
+    return float(out.rate.values[0])
+
+
+def convert_amount(amount, date, src_currency, dest_currency):
+    if src_currency == 'EUR' and dest_currency == 'EUR':
+        return round(amount, 2)
+    if src_currency == 'EUR' and dest_currency != 'EUR':
+        return round(amount * lookup_exchange_rate(date, dest_currency), 2)
+    if src_currency != 'EUR' and dest_currency == 'EUR':
+        return round(amount/lookup_exchange_rate(date, src_currency), 2)
+
+    converted = (amount/lookup_exchange_rate(date, src_currency)) * \
+        lookup_exchange_rate(date, dest_currency)
+    return round(converted, 2)
