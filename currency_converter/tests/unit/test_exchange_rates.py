@@ -7,12 +7,6 @@ from currency_converter.exchange_rates import load_exchange_data, \
 
 
 class ExchangeRatesTestCase(TestCase):
-    dict_df = {
-            'date': ['2020-05-19', '2020-05-20', '2020-05-20'],
-            'rate': [2.0958, 1.0958, 0.89358],
-            'currency': ['USD', 'USD', 'GBP'],
-        }
-
     @patch(
         'urllib.request.urlopen',
         return_value=open(
