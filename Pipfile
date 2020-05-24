@@ -9,6 +9,7 @@ verify_ssl = true
 django = "*"
 pandas = "*"
 flake8 = "*"
+mock = "*"
 
 [requires]
 python_version = "3.6"
