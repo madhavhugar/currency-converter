@@ -1,6 +1,5 @@
-from unittest.mock import Mock, patch
+from unittest.mock import patch
 from django.test import TestCase
-import pandas as pd
 
 from currency_converter.exchange_rates import load_exchange_data, \
     convert_amount, \
