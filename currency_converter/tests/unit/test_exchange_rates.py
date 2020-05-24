@@ -12,7 +12,11 @@ class ExchangeRatesTestCase(TestCase):
             'currency': ['USD', 'USD', 'GBP'],
         }
 
-    def test_load_exchange_data(self):
+    @patch(
+        'urllib.request.urlopen',
+        return_value=open(
+            'currency_converter/tests/unit/eurofxref-hist-90d.xml', 'r'))
+    def test_load_exchange_data(self, mock_urlopen):
         df = load_exchange_data()
 
         assert df is not None
