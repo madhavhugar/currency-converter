@@ -6,6 +6,9 @@ from currency_converter.exchange_rates import convert_amount
 
 
 def convert(request):
+    """
+    Handles GET => /convert
+    """
     try:
         if request.method == 'GET':
             amount = float(request.GET.get('amount', 0))
